@@ -1,35 +1,72 @@
 package sim.coder.contactus
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+
+
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var gitHubImageButton:ImageButton
-    lateinit var MapImageButton:ImageButton
-    lateinit var GmailImageButton:ImageButton
+    lateinit var mapImageButton:ImageButton
+    lateinit var gmailImageButton:ImageButton
+    lateinit var contactMeImageButton:ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+
+
+
 
         gitHubImageButton = findViewById(R.id.gitHub)
         gitHubImageButton.setOnClickListener {
             openGitHub()
         }
 
-        MapImageButton = findViewById(R.id.map)
-        MapImageButton.setOnClickListener {
+        mapImageButton = findViewById(R.id.map)
+        mapImageButton.setOnClickListener {
             openMap()
         }
 
-        GmailImageButton=findViewById(R.id.gmail)
-        GmailImageButton.setOnClickListener {
+        gmailImageButton=findViewById(R.id.gmail)
+        gmailImageButton.setOnClickListener {
             sendEmail()
         }
+
+        contactMeImageButton = findViewById(R.id.contact)
+        contactMeImageButton.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.WRITE_CONTACTS)
+                    != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,Array(1){Manifest.permission.READ_CONTACTS},111)
+            }
+            else
+                contactMeImageButton.isClickable = false
+
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode==111 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            contactMeImageButton.isClickable = true
+            contactMe()
+        }
+
+
 
     }
 
@@ -65,6 +102,21 @@ class MainActivity : AppCompatActivity() {
         if (sendIntent.resolveActivity(packageManager)!=null){
             startActivity(sendIntent)
         }
+    }
+
+
+    fun contactMe(){
+        val intent = Intent(
+                ContactsContract.Intents.SHOW_OR_CREATE_CONTACT,
+                ContactsContract.Contacts.CONTENT_URI)
+        intent.data = Uri.parse("tel:777128028")
+
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, "Mohammed Fouad")
+//        intent.putExtra(ContactsContract.Intents.Insert.POSTAL,
+//                "House Address, Street Name, State/Country")
+        startActivity(intent)
+        Toast.makeText(this, "Contact Saved Successfully", Toast.LENGTH_SHORT).show()
+
     }
 
 }

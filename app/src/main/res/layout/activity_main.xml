@@ -9,17 +9,22 @@
     tools:context=".MainActivity">
 
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/happy" />
+        android:background="#55050C"
+        android:text="User information"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
 
     <com.theophrast.ui.widget.SquareImageView
-        android:layout_width="120dp"
+        android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_marginStart="146dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="170dp"
         android:layout_marginEnd="146dp"
         android:scaleType="centerCrop"
         android:src="@drawable/adduser"
@@ -29,49 +34,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="250dp">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="300dp">
 
 
 
             <ImageButton
                 android:id="@+id/gitHub"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
                 android:layout_margin="10dp"
-                android:background="#ffffff"
+                android:background="#F8F4F4"
                 android:src="@drawable/github" />
             
             <ImageButton
                 android:id="@+id/map"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
                 android:layout_margin="10dp"
-                android:background="#ffffff"
+                android:background="#F8F4F4"
                 android:src="@drawable/map" />
 
             <ImageButton
                 android:id="@+id/gmail"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
                 android:layout_margin="10dp"
-                android:background="#ffffff"
+                android:background="#F8F4F4"
                 android:src="@drawable/gmail" />
 
 
+            <ImageButton
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#F6F5F5"
+                android:src="@drawable/contact" />
 
 
 
-        </LinearLayout>
+
+
+
+
 
 
 
